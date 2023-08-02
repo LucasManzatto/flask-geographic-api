@@ -2,7 +2,7 @@ import pandas as pd
 from pathlib import Path
 
 
-def write_file(file: bytes) -> str:
+def write_file(folder: str, file: bytes) -> str:
     """
     Write the uploaded file to the temporary directory.
 
@@ -12,11 +12,20 @@ def write_file(file: bytes) -> str:
     Returns:
         str: The file path where the file is saved.
     """
-    folder = "/tmp/trips/"
+    folder = f"/tmp/{folder}"
     Path(folder).mkdir(parents=True, exist_ok=True)
     file_path = f"{folder}{file.filename}"
     file.save(file_path)
+    # with open(file_path, "bw") as f:
+    #     chunk_size = 4096
+    #     while True:
+    #         chunk = request.stream.read(chunk_size)
+    #         if len(chunk) == 0:
+    #             break
+    #         f.write(chunk)
     return file_path
+
+       
 
 
 def read_file(file_path: str) -> pd.DataFrame:

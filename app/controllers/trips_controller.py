@@ -29,7 +29,7 @@ def upload():
         return jsonify({"error": "No selected file"}), 400
 
     try:
-        file_path = file_service.write_file(file=file)
+        file_path = file_service.write_file(folder="trips/", file=file)
         trips_service.write_to_database(file_path=file_path)
     except Exception as e:
         return jsonify({"error": str(e)}), 400
