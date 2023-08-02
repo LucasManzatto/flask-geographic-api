@@ -1,4 +1,4 @@
-from flask import Blueprint, flash, request, jsonify
+from flask import Blueprint, request, jsonify
 from app.services import trips_service, file_service
 from datetime import datetime
 
@@ -64,34 +64,3 @@ def get_weekly_average():
             return jsonify({"error": "The 2 points must be provided on the coordinates"}), 400
         df = trips_service.get_weekly_average(coordinates=data["coordinates"])
     return jsonify(df.to_json(orient="records")), 200
-
-
-# # Upload file as stream to a file.
-# @trips_blueprint.route("/upload_test", methods=["POST"])
-# def upload_test():
-#     start_time = datetime.now()
-#     try:
-#         folder = "/tmp/trips/"
-#         Path(folder).mkdir(parents=True, exist_ok=True)
-#         file_path = f"{folder}test.csv"
-#         with open(file_path, "bw") as f:
-#             chunk_size = 4096
-#             while True:
-#                 chunk = request.stream.read(chunk_size)
-#                 if len(chunk) == 0:
-#                     break
-#                 f.write(chunk)
-#         data = file_service.read_file(file_path=file_path)
-#         trips_service.write_to_database(df=data)
-#     except Exception as e:
-#         raise (e)
-#     end_time = datetime.now()
-#     return (
-#         jsonify(
-#             {
-#                 "status": "Ingestion finished sucessfully",
-#                 "time": str(end_time - start_time),
-#             }
-#         ),
-#         200,
-#     )
