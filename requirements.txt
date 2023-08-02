@@ -1,0 +1,8 @@
+Flask
+pymysql
+flask_sqlalchemy
+cryptography
+pandas
+shapely
+geoalchemy2
+psycopg2-binary
