@@ -58,18 +58,47 @@ def get_weekly_average():
     """
     start_time = datetime.now()
     data = request.json
-    if "region" in data:
-        df = trips_service.get_weekly_average(region=data["region"])
-    if "coordinates" in data:
-        if (
-            "first_point" not in data["coordinates"]
-            or "second_point" not in data["coordinates"]
-        ):
-            return (
-                jsonify({"error": "The 2 points must be provided on the coordinates"}),
-                400,
-            )
-        df = trips_service.get_weekly_average(coordinates=data["coordinates"])
+
+    # Validate the request data
+    if "region" in data and "coordinates" in data:
+        return (
+            jsonify(
+                {"error": "Please provide either 'region' or 'coordinates', not both"}
+            ),
+            400,
+        )
+
+    if "region" not in data and "coordinates" not in data:
+        return (
+            jsonify(
+                {
+                    "error": "Please provide either 'region' or 'coordinates' in the request"
+                }
+            ),
+            400,
+        )
+
+    try:
+        if "region" in data:
+            df = trips_service.get_weekly_average(region=data["region"])
+        else:
+            coordinates = data.get("coordinates", {})
+            first_point = coordinates.get("first_point")
+            second_point = coordinates.get("second_point")
+
+            if not (first_point and second_point):
+                return (
+                    jsonify(
+                        {
+                            "error": "Both 'first_point' and 'second_point' are required in 'coordinates'"
+                        }
+                    ),
+                    400,
+                )
+            df = trips_service.get_weekly_average(coordinates=coordinates)
+    except Exception as e:
+        return jsonify({"error": str(e)}), 400
+
     end_time = datetime.now()
     return (
         jsonify(
