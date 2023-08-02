@@ -83,6 +83,7 @@ The application exposes the following endpoints:
 ## Performance
 
 It took 54:42 minutes to upload and insert 55.440.000 million rows into the database
+
 ![image](https://github.com/LucasManzatto/upload_api/assets/12992999/c6b99af3-ee80-40f2-9863-96f10f04f518)
 
 ![image](https://github.com/LucasManzatto/upload_api/assets/12992999/da373dfb-bdce-4e8d-b516-7c032321a3ef)
