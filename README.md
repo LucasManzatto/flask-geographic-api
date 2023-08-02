@@ -105,5 +105,6 @@ Using a bounding box takes about 20 seconds
 The query From the two most commonly appearing regions, which is the latest datasource? (queries/postgres/scripts/latest_datasource_from_common_regions.sql) took 1min2s to complete
 ![image](https://github.com/LucasManzatto/upload_api/assets/12992999/28d108d2-1907-4e21-a923-8f4b44b664b4)
 
-The query From the two most commonly appearing regions, which is the latest datasource? (queries/postgres/scripts/latest_datasource_from_common_regions.sql) took 1min2s to complete
+The query What regions has the "cheap_mobile" datasource appeared in? (datasource_in_regions.sql) took 23s to complete
+![image](https://github.com/LucasManzatto/upload_api/assets/12992999/8eb390e2-0e4d-48d9-bb77-6c006a905d1a)
 
