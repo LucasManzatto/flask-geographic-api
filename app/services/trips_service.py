@@ -1,7 +1,5 @@
 from typing import Dict, Optional, Union
-import pandas as pd
 import app.services.database_service as database_service
-from shapely import wkt
 
 
 def write_to_database(file_path: str) -> bool:
