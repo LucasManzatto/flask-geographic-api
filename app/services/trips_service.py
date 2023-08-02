@@ -52,22 +52,14 @@ def get_weekly_average(
         destination_coord))
             """
     query = f"""
-        with cte1 as
-        (
-        select
-            COUNT(region) as total,
-            extract(WEEK
-        from
-            datetime) as week
-        from
-            trips
-        where
-            {filter}
-        group by
-            week)
-        select
-            AVG(total) as weekly_average
-        from
-            cte1
+        WITH cte1 AS
+        (SELECT COUNT(region) AS total,
+                extract(WEEK
+                        FROM datetime) AS WEEK
+        FROM trips
+        WHERE {filter}
+        GROUP BY WEEK)
+        SELECT AVG(total) AS weekly_average
+        FROM cte1
         """
     return database_service.query_from_database(query=query)
