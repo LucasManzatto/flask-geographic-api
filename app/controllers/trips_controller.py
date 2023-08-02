@@ -56,6 +56,7 @@ def get_weekly_average():
     Raises:
         400 (Bad Request): If the request JSON data is malformed or missing required fields.
     """
+    start_time = datetime.now()
     data = request.json
     if "region" in data:
         df = trips_service.get_weekly_average(region=data["region"])
@@ -63,4 +64,13 @@ def get_weekly_average():
         if "first_point" not in data["coordinates"] or "second_point" not in data["coordinates"]:
             return jsonify({"error": "The 2 points must be provided on the coordinates"}), 400
         df = trips_service.get_weekly_average(coordinates=data["coordinates"])
-    return jsonify(df.to_json(orient="records")), 200
+    end_time = datetime.now()
+    return (
+        jsonify(
+            {
+                "result": df.iloc[0, 0],
+                "time": str(end_time - start_time),
+            }
+        ),
+        200,
+    )
