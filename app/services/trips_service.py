@@ -17,7 +17,11 @@ def write_to_database(file_path: str) -> bool:
     """
     return database_service.write_to_database(file_path=file_path, table_name="trips")
 
-def get_weekly_average(region: Optional[str] = None, coordinates: Optional[Dict[str, Union[str, Dict[str, float]]]] = None) -> Dict[str, float]:
+
+def get_weekly_average(
+    region: Optional[str] = None,
+    coordinates: Optional[Dict[str, Union[str, Dict[str, float]]]] = None,
+) -> Dict[str, float]:
     """
     Get the weekly average data for a specific region or coordinates.
 
@@ -36,8 +40,12 @@ def get_weekly_average(region: Optional[str] = None, coordinates: Optional[Dict[
     if region:
         filter = f"region = '{region}'"
     if coordinates:
-        first_point = f"{coordinates['first_point']['lat']} {coordinates['first_point']['lon']}"
-        second_point = f"{coordinates['second_point']['lat']} {coordinates['second_point']['lon']}"
+        first_point = (
+            f"{coordinates['first_point']['lat']} {coordinates['first_point']['lon']}"
+        )
+        second_point = (
+            f"{coordinates['second_point']['lat']} {coordinates['second_point']['lon']}"
+        )
         filter = f"""
         ST_Contains(ST_Envelope('LINESTRING ({first_point}, {second_point})'),
         ST_MakeLine(origin_coord,

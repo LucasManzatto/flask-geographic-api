@@ -4,6 +4,7 @@ from geoalchemy2 import Geometry
 
 Base = declarative_base()
 
+
 # Define the SQLAlchemy model class for the table Trips
 class Trips(Base):
     __tablename__ = "trips"

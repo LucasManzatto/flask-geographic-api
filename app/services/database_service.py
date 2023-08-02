@@ -5,7 +5,9 @@ from app.models.trips import Base
 from sqlalchemy.sql import text
 
 
-def write_to_database(file_path: str, table_name: str, engine_type: str = "postgres") -> bool:
+def write_to_database(
+    file_path: str, table_name: str, engine_type: str = "postgres"
+) -> bool:
     """
     Write data from a CSV file into a specified table in the database.
 
@@ -19,38 +21,50 @@ def write_to_database(file_path: str, table_name: str, engine_type: str = "postg
     """
     engine = get_connection(engine_type=engine_type)
     with engine.connect() as con:
-        statement = text(f'''
+        statement = text(
+            f"""
             CREATE EXTENSION IF NOT EXISTS postgis;
-            ''')
+            """
+        )
         con.execute(statement)
         con.commit()
     Base.metadata.create_all(engine)
     with engine.connect() as con:
-        statement = text(f'''
+        statement = text(
+            f"""
             TRUNCATE TABLE {table_name} 
             RESTART IDENTITY;
-            ''')
+            """
+        )
         con.execute(statement)
-        statement = text(f'''
+        statement = text(
+            f"""
             COPY {table_name}(region,origin_coord,destination_coord,datetime,datasource)
             FROM '{file_path}'
             DELIMITER ','
             CSV HEADER;
-            ''')
+            """
+        )
         con.execute(statement)
-        statement = text(f'''
+        statement = text(
+            f"""
             CREATE INDEX if not exists idx_destination_coord ON trips USING gist (destination_coord);
-            ''')
+            """
+        )
         con.execute(statement)
-        statement = text(f'''
+        statement = text(
+            f"""
             CREATE INDEX if not exists idx_origin_coord ON trips USING gist (origin_coord);
-            ''')
+            """
+        )
         con.execute(statement)
         con.commit()
     return True
 
 
-def query_from_database(query: str, engine_type: str = "postgres") -> Union[pd.DataFrame, Any]:
+def query_from_database(
+    query: str, engine_type: str = "postgres"
+) -> Union[pd.DataFrame, Any]:
     """
     Execute a SQL query and retrieve the result as a DataFrame.
 

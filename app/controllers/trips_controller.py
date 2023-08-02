@@ -61,8 +61,14 @@ def get_weekly_average():
     if "region" in data:
         df = trips_service.get_weekly_average(region=data["region"])
     if "coordinates" in data:
-        if "first_point" not in data["coordinates"] or "second_point" not in data["coordinates"]:
-            return jsonify({"error": "The 2 points must be provided on the coordinates"}), 400
+        if (
+            "first_point" not in data["coordinates"]
+            or "second_point" not in data["coordinates"]
+        ):
+            return (
+                jsonify({"error": "The 2 points must be provided on the coordinates"}),
+                400,
+            )
         df = trips_service.get_weekly_average(coordinates=data["coordinates"])
     end_time = datetime.now()
     return (

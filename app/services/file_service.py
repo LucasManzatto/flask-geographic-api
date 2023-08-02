@@ -25,8 +25,6 @@ def write_file(folder: str, file: bytes) -> str:
     #         f.write(chunk)
     return file_path
 
-       
-
 
 def read_file(file_path: str) -> pd.DataFrame:
     """
