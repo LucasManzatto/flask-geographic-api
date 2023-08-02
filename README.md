@@ -83,6 +83,7 @@ The application exposes the following endpoints:
 ## Results
 
 **1. Upload endpoint**
+
 It took 54min42s to upload and insert 55.440.000 million rows into the database. It was not possible to insert more rows because my laptop can't handle, but the endpoint and the queries can handle 100 millions rows just fine.
 
 ![image](https://github.com/LucasManzatto/upload_api/assets/12992999/c6b99af3-ee80-40f2-9863-96f10f04f518)
@@ -90,6 +91,7 @@ It took 54min42s to upload and insert 55.440.000 million rows into the database.
 ![image](https://github.com/LucasManzatto/upload_api/assets/12992999/da373dfb-bdce-4e8d-b516-7c032321a3ef)
 
 **2. Weekly average endpoint**
+
 Using region takes about 12 seconds
 
 ![image](https://github.com/LucasManzatto/upload_api/assets/12992999/fa1453e5-9941-4baf-97a7-ce598aea8302)
@@ -99,6 +101,7 @@ Using a bounding box takes about 20 seconds
 ![image](https://github.com/LucasManzatto/upload_api/assets/12992999/52fa0732-a974-4a28-8661-917a4084783e)
 
 **3. Bonus queries**
+
 The query From the two most commonly appearing regions, which is the latest datasource? (queries/postgres/scripts/latest_datasource_from_common_regions.sql) took 1min2s to complete
 ![image](https://github.com/LucasManzatto/upload_api/assets/12992999/28d108d2-1907-4e21-a923-8f4b44b664b4)
 
