@@ -2,6 +2,8 @@ import pandas as pd
 from pathlib import Path
 
 
+ALLOWED_FORMATS = ["csv"]
+
 def write_file(folder: str, file: bytes) -> str:
     """
     Write the uploaded file to the temporary directory.
@@ -16,13 +18,6 @@ def write_file(folder: str, file: bytes) -> str:
     Path(folder).mkdir(parents=True, exist_ok=True)
     file_path = f"{folder}{file.filename}"
     file.save(file_path)
-    # with open(file_path, "bw") as f:
-    #     chunk_size = 4096
-    #     while True:
-    #         chunk = request.stream.read(chunk_size)
-    #         if len(chunk) == 0:
-    #             break
-    #         f.write(chunk)
     return file_path
 
 
@@ -69,4 +64,4 @@ def __allowed_file(file: str) -> bool:
     Returns:
         bool: True if the file has an allowed format, False otherwise.
     """
-    return "." in file and file.rsplit(".", 1)[1].lower() in ["csv"]
+    return "." in file and file.rsplit(".", 1)[1].lower() in ALLOWED_FORMATS
