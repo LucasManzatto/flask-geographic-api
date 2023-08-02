@@ -41,6 +41,16 @@ Explanation:
 
 By using `ST_Contains` in combination with `ST_Envelope` and `ST_MakeLine`, the application can efficiently identify which trips fall within a specific region defined by a rectangular bounding box. This allows users to retrieve weekly average data for trips that are entirely within a given region, helping to analyze trips within specific geographic boundaries.
 
+Another example is to calculate how close 2 trips are from each other [Query Link](https://github.com/LucasManzatto/upload_api/blob/main/app/queries/postgres/scripts/similar_trips.sql)
+
+```sql
+ST_DISTANCE(LAG(origin_coord::geography) OVER(ORDER BY region, origin_coord DESC), origin_coord::geography) AS origin_distance_to_closest
+```
+This is an example SQL query that calculates the distance from each row's origin_coord to the closest origin_coord in the previous row, based on the region and sorted by origin_coord in descending order.
+
+Query Explanation
+The query uses the ST_DISTANCE function along with the LAG window function to calculate the distance between each origin_coord and the closest previous origin_coord within the same region.
+
 ## Usage
 
 **1. Upload trips data:**
@@ -102,9 +112,13 @@ Using a bounding box takes about 20 seconds
 
 **3. Bonus queries**
 
-The query From the two most commonly appearing regions, which is the latest datasource? (queries/postgres/scripts/latest_datasource_from_common_regions.sql) took 1min2s to complete
+The [Query](https://github.com/LucasManzatto/upload_api/blob/main/app/queries/postgres/scripts/latest_datasource_from_common_regions.sql) From the two most commonly appearing regions, which is the latest datasource? took 1min2s to complete
 ![image](https://github.com/LucasManzatto/upload_api/assets/12992999/28d108d2-1907-4e21-a923-8f4b44b664b4)
 
-The query What regions has the "cheap_mobile" datasource appeared in? (datasource_in_regions.sql) took 23s to complete
+The [Query](https://github.com/LucasManzatto/upload_api/blob/main/app/queries/postgres/scripts/datasource_in_regions.sql) What regions has the "cheap_mobile" datasource appeared in? took 23s to complete
 ![image](https://github.com/LucasManzatto/upload_api/assets/12992999/8eb390e2-0e4d-48d9-bb77-6c006a905d1a)
 
+
+## Cloud Solution
+
+![Blank diagram - Page 1 (1)](https://github.com/LucasManzatto/upload_api/assets/12992999/1867eafa-c4e2-4cc4-8ff3-8a41545ab9e2)
