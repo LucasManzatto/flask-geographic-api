@@ -21,6 +21,9 @@ docker-compose up --build
 ```
 The application will start running on http://localhost:5000/.
 
+## Database
+The SQL database used for this application is PostgreSQL. PostgreSQL was chosen because of its excellent support for geographic data and advanced spatial features. It allows us to efficiently store and query location-based information, making it an ideal choice for managing trips data with geographic coordinates.
+
 ## Usage
 
 **1. Upload trips data:**
