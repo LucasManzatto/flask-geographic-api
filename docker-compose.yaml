@@ -29,6 +29,7 @@ services:
        - upload-volume:/tmp
     networks:
       - my_network
+    restart: always
 
 networks:
   my_network:
