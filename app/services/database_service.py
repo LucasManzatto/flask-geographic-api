@@ -18,6 +18,12 @@ def write_to_database(file_path: str, table_name: str, engine_type: str = "postg
         bool: True if the data is successfully written to the database, False otherwise.
     """
     engine = get_connection(engine_type=engine_type)
+    with engine.connect() as con:
+        statement = text(f'''
+            CREATE EXTENSION IF NOT EXISTS postgis;
+            ''')
+        con.execute(statement)
+        con.commit()
     Base.metadata.create_all(engine)
     with engine.connect() as con:
         statement = text(f'''
