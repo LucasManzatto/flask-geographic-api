@@ -41,7 +41,7 @@ Explanation:
 
 By using `ST_Contains` in combination with `ST_Envelope` and `ST_MakeLine`, the application can efficiently identify which trips fall within a specific region defined by a rectangular bounding box. This allows users to retrieve weekly average data for trips that are entirely within a given region, helping to analyze trips within specific geographic boundaries.
 
-Another example is to calculate how close 2 trips are from each other [Query Link](https://github.com/LucasManzatto/upload_api/blob/main/app/queries/postgres/scripts/similar_trips.sql)
+Another example is to calculate how close 2 trips are from each other [Query](https://github.com/LucasManzatto/upload_api/blob/main/app/queries/postgres/scripts/similar_trips.sql)
 
 ```sql
 ST_DISTANCE(LAG(origin_coord::geography) OVER(ORDER BY region, origin_coord DESC), origin_coord::geography) AS origin_distance_to_closest
