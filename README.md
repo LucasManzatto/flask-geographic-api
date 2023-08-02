@@ -2,6 +2,10 @@
 
 This is a Flask-based web application that allows users to upload trips data, ingest it into a database, and retrieve weekly average data for specific regions or coordinates.
 
+## Requirements
+1. Docker
+2. Docker compose V2
+
 ## Installation
 1. Clone the repository:
 
