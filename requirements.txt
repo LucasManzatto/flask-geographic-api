@@ -3,3 +3,4 @@ GeoAlchemy2==0.14.1
 pandas==2.0.3
 SQLAlchemy==2.0.19
 psycopg2-binary==2.9.6
+numpy==1.26.4
